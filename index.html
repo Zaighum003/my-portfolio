@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AI Engineer Portfolio — NEURAL_DEV</title>
+    <meta name="description"
+        content="Junior Full Stack AI Engineer portfolio. Python, LangChain, LangGraph, FastAPI, React, GCP, Azure. Building AI-powered applications with LLMs, Generative AI, and RAG pipelines." />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <!-- Background Canvas: Animated Token Stream -->
+    <canvas id="token-stream-canvas"></canvas>
+    <!-- Neural Pattern (subtle dot grid) -->
+    <div class="neural-pattern-bg"></div>
+
+    <!-- ======================= NAVBAR ======================= -->
+    <header class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <nav class="navbar-links" id="nav-links">
+                <a href="#home" class="navbar-link active" data-section="home">Home</a>
+                <a href="#projects" class="navbar-link" data-section="projects">Projects</a>
+                <a href="#skills" class="navbar-link" data-section="skills">Skills</a>
+                <a href="#about" class="navbar-link" data-section="about">About</a>
+            </nav>
+
+            <div class="navbar-right">
+                <div class="navbar-social-divider">
+                    <!-- GitHub -->
+                    <a class="navbar-social-link" href="https://github.com/Zaighum003" target="_blank" rel="noopener"
+                        aria-label="GitHub">
+                        <svg class="w-5 h-5" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                        </svg>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a class="navbar-social-link" href="https://www.linkedin.com/in/zaighum-zawar-482557248/"
+                        target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                    </a>
+                    <!-- WhatsApp -->
+                    <a class="navbar-social-link" href="https://wa.me/923098719135" target="_blank" rel="noopener"
+                        aria-label="WhatsApp">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                        </svg>
+                    </a>
+                </div>
+                <a href="Zaighum Zawar.pdf" download class="btn-resume" target="_blank">Resume</a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav">
+        <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <a href="#home" class="active">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#about">About</a>
+        <a href="Zaighum Zawar.pdf" download class="btn-resume" style="margin-top: 1rem;" target="_blank">Resume</a>
+    </div>
+
+    <!-- ======================= HERO SECTION ======================= -->
+    <main>
+        <section class="hero section" id="home">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content fade-in-up">
+                        <!-- Status Pill -->
+                        <div class="status-pill">
+                            <span class="status-dot"></span>
+                            <span class="status-text font-code-block">System.Status: Online</span>
+                        </div>
+
+                        <!-- Headers -->
+                        <div>
+                            <h1 class="hero-title">
+                                Junior Full Stack AI Engineer<span class="accent">.</span>
+                                <span class="hero-subtitle">Python · LangChain · LangGraph · FastAPI · React · GCP ·
+                                    Azure</span>
+                            </h1>
+                            <p class="hero-desc">
+                                Junior Full Stack AI Engineer with 1+ year of startup experience designing and deploying
+                                AI-powered applications using LLMs, Generative AI, Agentic AI systems, and RAG
+                                pipelines.
+                            </p>
+                        </div>
+
+                        <!-- CTAs -->
+                        <div class="cta-group" style="margin-bottom: 0.75rem;">
+                            <a href="#projects" class="btn-primary">
+                                <span class="material-symbols-outlined"
+                                    style="font-variation-settings: 'FILL' 1; font-size: 18px;">terminal</span>
+                                View Projects
+                            </a>
+                            <a href="Zaighum Zawar.pdf" download class="btn-secondary" target="_blank">
+                                <span class="material-symbols-outlined" style="font-size: 18px;">download</span>
+                                Download CV
+                            </a>
+                            <a href="https://wa.me/923098719135" class="btn-ghost" target="_blank" rel="noopener">
+                                Let's Talk
+                                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+                            </a>
+                            <a href="mailto:zaighumzawar7@gmail.com" class="btn-ghost" target="_blank" rel="noopener">
+                                or mail me at : zaighumzawar7@gmail.com
+                                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+                            </a>
+                        </div>
+
+
+                        <!-- Connect Bar -->
+                        <div class="connect-bar">
+                            <span class="connect-label">Connect //</span>
+                            <a class="connect-link" href="https://github.com/Zaighum003" target="_blank" rel="noopener"
+                                aria-label="GitHub">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                                </svg>
+                            </a>
+                            <a class="connect-link" href="https://www.linkedin.com/in/zaighum-zawar-482557248/"
+                                target="_blank" rel="noopener" aria-label="LinkedIn">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                </svg>
+                            </a>
+                            <a class="connect-link" href="https://huggingface.co/Zaighum003" target="_blank"
+                                rel="noopener" aria-label="Hugging Face">
+                                <span style="font-size: 1.5rem;">🤗</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Profile Image -->
+                    <div class="hero-image-wrapper fade-in-up" style="transition-delay: 0.2s;">
+                        <div class="hero-image-frame">
+                            <div class="hero-image-inner">
+                                <img src="assets/images/profile.jpg" alt="AI Engineer Profile" />
+                                <div class="hero-image-overlay"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= PROJECTS SECTION ======================= -->
+        <section class="projects-section section" id="projects">
+            <div class="container">
+                <header class="projects-header fade-in-up">
+                    <h2>Systems &amp; Architecture.</h2>
+                    <p class="font-body-base">A curated selection of production-grade AI engineering projects.
+                        Emphasizing scalable infrastructure, autonomous agent frameworks, and high-performance inference
+                        endpoints.</p>
+                </header>
+
+                <div class="projects-grid">
+                    <!-- Project 1: CDSS -->
+                    <article class="project-card fade-in-up">
+                        <div class="project-card-image">
+                            <img src="assets/images/project-cdss.jpg" alt="Agentic AI Dashboard" />
+                        </div>
+                        <div class="project-card-body">
+                            <span class="project-badge">Agentic AI</span>
+                            <h3>Agentic Clinical Decision Support System (CDSS) (FYP)</h3>
+                            <p class="desc font-body-sm">Focus on multi-agent reasoning, PubMed/RxNorm MCP servers.
+                                Leveraging RAG and specialized MCP servers for clinical decision support.</p>
+                            <div class="tech-tags">
+                                <span class="tech-tag"><span class="material-symbols-outlined"
+                                        style="font-size: 14px;">terminal</span> Python</span>
+                                <span class="tech-tag"><span class="material-symbols-outlined"
+                                        style="font-size: 14px;">link</span> LangChain</span>
+                                <span class="tech-tag"><span class="material-symbols-outlined"
+                                        style="font-size: 14px;">hub</span> LangGraph</span>
+                                <span class="tech-tag"><span class="material-symbols-outlined"
+                                        style="font-size: 14px;">search</span> RAG</span>
+                                <span class="tech-tag"><span class="material-symbols-outlined"
+                                        style="font-size: 14px;">database</span> ChromaDB</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="project-link primary-link">
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
+                                    Live Demo
+                                </a>
+                                <a href="https://github.com/Zaighum003/Agentic-AI-powered-CDSS-leveraging-AgenticRag.git"
+                                    class="project-link secondary-link" target="_blank" rel="noopener">
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">code</span> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: Blog Generation -->
+                    <article class="project-card fade-in-up" style="transition-delay: 0.15s;">
+                        <div class="project-card-image">
+                            <img src="assets/images/project-blog.jpg" alt="RAG System Visualization" />
+                        </div>
+                        <div class="project-card-body">
+                            <span class="project-badge">Agentic Content</span>
+                            <h3>Blog Generation Agentic AI App</h3>
+                            <p class="desc font-body-sm">Focus on graph-based routing and multilingual translation
+                                paths. Architecture for autonomous blog generation and quality assurance.</p>
+                            <div class="tech-tags">
+                                <span class="tech-tag"><span class="material-symbols-outlined"
+                                        style="font-size: 14px;">api</span> FastAPI</span>
+                                <span class="tech-tag"><span class="material-symbols-outlined"
+                                        style="font-size: 14px;">hub</span> LangGraph</span>
+                                <span class="tech-tag"><span class="material-symbols-outlined"
+                                        style="font-size: 14px;">link</span> LangChain</span>
+                                <span class="tech-tag"><span class="material-symbols-outlined"
+                                        style="font-size: 14px;">memory</span> Groq</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="project-link primary-link">
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
+                                    Live Demo
+                                </a>
+                                <a href="https://github.com/Zaighum003/bloggeneration-agentic-ai.git"
+                                    class="project-link secondary-link" target="_blank" rel="noopener">
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">code</span> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: Vehicle Predictive Health (Featured - Full Width) -->
+                    <article class="project-card featured fade-in-up">
+                        <div class="project-card-inner">
+                            <div class="project-card-image">
+                                <img src="assets/images/project-vehicle.jpg" alt="ML Ops Deployment" />
+                            </div>
+                            <div class="project-card-body">
+                                <span class="project-badge">Predictive Maintenance</span>
+                                <h3>AI-Powered Vehicle Predictive Health Maintenance</h3>
+                                <p class="desc font-body-sm">Focus on real-time OBD-II data and repair recommendations.
+                                    Processing vehicle telemetry for predictive diagnostics, augmented with RAG.</p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag"><span class="material-symbols-outlined"
+                                            style="font-size: 14px;">terminal</span> Python</span>
+                                    <span class="tech-tag"><span class="material-symbols-outlined"
+                                            style="font-size: 14px;">sync_alt</span> WebSockets</span>
+                                    <span class="tech-tag"><span class="material-symbols-outlined"
+                                            style="font-size: 14px;">database</span> PostgreSQL</span>
+                                    <span class="tech-tag"><span class="material-symbols-outlined"
+                                            style="font-size: 14px;">schema</span> pgvector</span>
+                                    <span class="tech-tag"><span class="material-symbols-outlined"
+                                            style="font-size: 14px;">search</span> RAG</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" class="project-link primary-link">
+                                        <span class="material-symbols-outlined"
+                                            style="font-size: 16px;">open_in_new</span> Architecture View
+                                    </a>
+                                    <a href="#" class="project-link secondary-link">
+                                        <span class="material-symbols-outlined" style="font-size: 16px;">code</span>
+                                        GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= SKILLS SECTION ======================= -->
+        <section class="skills-section section" id="skills">
+            <div class="container">
+                <header class="skills-header fade-in-up">
+                    <h2>Technical Arsenal</h2>
+                    <p class="font-body-base">A curated mapping of my technical capabilities across machine learning,
+                        agentic systems, and full-stack architecture.</p>
+                </header>
+
+                <!-- Bento Grid Skills -->
+                <div class="skills-bento">
+                    <!-- Languages -->
+                    <div class="glass-card fade-in-up">
+                        <div class="glass-card-header">
+                            <span class="material-symbols-outlined">terminal</span>
+                            <h3>Languages</h3>
+                        </div>
+                        <div class="chip-grid">
+                            <span class="chip">Python</span>
+                            <span class="chip">JavaScript</span>
+                            <span class="chip">TypeScript</span>
+                            <span class="chip">SQL</span>
+                            <span class="chip">C++</span>
+                        </div>
+                    </div>
+
+                    <!-- AI / ML -->
+                    <div class="glass-card fade-in-up" style="transition-delay: 0.1s;">
+                        <div class="glass-card-header">
+                            <span class="material-symbols-outlined">hub</span>
+                            <h3>AI / ML</h3>
+                        </div>
+                        <div class="chip-grid">
+                            <span class="chip">LangChain</span>
+                            <span class="chip">LangGraph</span>
+                            <span class="chip">OpenAI</span>
+                            <span class="chip">Groq</span>
+                            <span class="chip">RAG</span>
+                            <span class="chip">HuggingFace</span>
+                            <span class="chip">PyTorch</span>
+                        </div>
+                    </div>
+
+                    <!-- Web & APIs -->
+                    <div class="glass-card fade-in-up" style="transition-delay: 0.2s;">
+                        <div class="glass-card-header">
+                            <span class="material-symbols-outlined">api</span>
+                            <h3>Web &amp; APIs</h3>
+                        </div>
+                        <div class="chip-grid">
+                            <span class="chip">FastAPI</span>
+                            <span class="chip">React</span>
+                            <span class="chip">Next.js</span>
+                            <span class="chip">Node.js</span>
+                            <span class="chip">REST</span>
+                            <span class="chip">WebSockets</span>
+                            <span class="chip">MCP</span>
+                        </div>
+                    </div>
+
+                    <!-- Databases & Cloud -->
+                    <div class="glass-card fade-in-up">
+                        <div class="glass-card-header">
+                            <span class="material-symbols-outlined">database</span>
+                            <h3>Databases &amp; Cloud</h3>
+                        </div>
+                        <div class="chip-grid">
+                            <span class="chip">PostgreSQL</span>
+                            <span class="chip">ChromaDB</span>
+                            <span class="chip">pgvector</span>
+                            <span class="chip">GCP</span>
+                            <span class="chip">Azure</span>
+                        </div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="glass-card fade-in-up" style="transition-delay: 0.1s;">
+                        <div class="glass-card-header">
+                            <span class="material-symbols-outlined">build</span>
+                            <h3>Tools</h3>
+                        </div>
+                        <div class="chip-grid">
+                            <span class="chip">Git</span>
+                            <span class="chip">Docker</span>
+                            <span class="chip">VS Code</span>
+                            <span class="chip">GitHub Actions</span>
+                            <span class="chip">Postman</span>
+                            <span class="chip">Figma</span>
+                            <span class="chip">Linux</span>
+                            <span class="chip">Jupyter</span>
+                            <span class="chip">Cursor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Currently Learning -->
+                <div style="margin-top: 4rem; border-top: 1px solid rgba(66,71,84,0.1); padding-top: 4rem;">
+                    <div class="section-divider">
+                        <div class="line"></div>
+                        <h3>Currently Learning</h3>
+                        <div class="line"></div>
+                    </div>
+                    <div class="learning-items">
+                        <div class="learning-item">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">downloading</span>
+                            <span class="label font-code-block">Rust</span>
+                        </div>
+                        <div class="learning-item">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">downloading</span>
+                            <span class="label font-code-block">WebGPU</span>
+                        </div>
+                        <div class="learning-item">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">downloading</span>
+                            <span class="label font-code-block">Mamba Architectures</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional Certifications -->
+                <div style="margin-top: 4rem; border-top: 1px solid rgba(66,71,84,0.1); padding-top: 4rem;">
+                    <div class="section-divider" style="margin-bottom: 3rem;">
+                        <div class="line"></div>
+                        <h3>Professional Certifications</h3>
+                        <div class="line"></div>
+                    </div>
+                    <div class="certs-grid">
+                        <div class="cert-card fade-in-up">
+                            <img src="assets/images/cert-gcp.mhtml" alt="GCP" />
+                            <div class="cert-info">
+                                <h4>GCP Generative AI Leader</h4>
+                                <p>Google Cloud Platform</p>
+                            </div>
+                        </div>
+                        <div class="cert-card fade-in-up" style="transition-delay: 0.05s;">
+                            <img src="assets/images/ibm.webp" alt="IBM" />
+                            <div class="cert-info">
+                                <h4>Agentic AI with LangChain and LangGraph</h4>
+                                <p>IBM</p>
+                            </div>
+                        </div>
+                        <div class="cert-card fade-in-up" style="transition-delay: 0.1s;">
+                            <img src="assets/images/ibm.webp" alt="IBM" />
+                            <div class="cert-info">
+                                <h4>AI Agents and Agentic Workflows</h4>
+                                <p>IBM</p>
+                            </div>
+                        </div>
+                        <div class="cert-card fade-in-up" style="transition-delay: 0.15s;">
+                            <img src="assets/images/DLAI.webp" alt="DeepLearning.AI" />
+                            <div class="cert-info">
+                                <h4>Machine Learning Specialization</h4>
+                                <p>Coursera / DeepLearning.AI</p>
+                            </div>
+                        </div>
+                        <div class="cert-card fade-in-up" style="transition-delay: 0.2s;">
+                            <img src="assets/images/githubpng.mhtml" alt="GitHub" />
+                            <div class="cert-info">
+                                <h4>GitHub Foundations Certification</h4>
+                                <p>GitHub</p>
+                            </div>
+                        </div>
+                        <div class="cert-card fade-in-up" style="transition-delay: 0.25s;">
+                            <img src="assets/images/google.webp" alt="Google" />
+                            <div class="cert-info">
+                                <h4>Google Prompting Essentials</h4>
+                                <p>Google</p>
+                            </div>
+                        </div>
+                        <div class="cert-card fade-in-up" style="transition-delay: 0.3s;">
+                            <img src="assets/images/cert-umich.png" alt="University of Michigan" />
+                            <div class="cert-info">
+                                <h4>Web Designing for Everyone</h4>
+                                <p>University of Michigan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= ABOUT SECTION ======================= -->
+        <section class="about-section section" id="about">
+            <div class="container">
+                <!-- Bio -->
+                <div class="about-header fade-in-up">
+                    <h2>About the Engineer.</h2>
+                </div>
+                <div class="about-grid fade-in-up">
+                    <div class="about-text font-body-base">
+                        <p>My journey into Artificial Intelligence didn't start with algorithms; it started with a
+                            frustration for inefficient systems. As a self-taught developer initially focused on web
+                            interfaces, I quickly realized that the true bottleneck wasn't how things looked, but how
+                            they reasoned. This realization drove me to dive deep into machine learning, transitioning
+                            from building static UIs to developing intelligent, adaptive systems.</p>
+                        <p>Today, I operate at the intersection of full-stack engineering and applied AI. I specialize
+                            in taking complex, computationally heavy models and wrapping them in elegant, highly
+                            performant interfaces. My focus isn't just on training models in a vacuum, but on deploying
+                            them into production environments where they can solve real-world problems.</p>
+                        <p>I believe the next generation of software won't just be 'used'; it will be conversed with. My
+                            current research and personal projects are heavily focused on leveraging Large Language
+                            Models (LLMs) to create generative applications that augment human creativity rather than
+                            replace it.</p>
+                    </div>
+                    <div class="about-sidebar">
+                        <div class="about-sidebar-card">
+                            <img src="assets/images/workspace.jpg" alt="Workspace" />
+                            <h3>Location</h3>
+                            <p class="sidebar-text">Remote / Karachi</p>
+                            <h3>Focus</h3>
+                            <div class="focus-tags">
+                                <span class="focus-tag">Agentic AI</span>
+                                <span class="focus-tag">Generative AI</span>
+                                <span class="focus-tag">LLMs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tech Philosophy -->
+                <div class="philosophy-card fade-in-up">
+                    <span class="material-symbols-outlined bg-icon"
+                        style="font-variation-settings: 'FILL' 1;">terminal</span>
+                    <p class="philosophy-label">Tech Philosophy</p>
+                    <blockquote class="philosophy-quote">
+                        "End-to-end ownership. I don't just train models; I ship real AI products that users can
+                        actually interact with."
+                    </blockquote>
+                </div>
+
+                <!-- Timeline -->
+                <div class="timeline-section fade-in-up">
+                    <h2>The Journey.</h2>
+                    <div class="timeline">
+                        <!-- Item 1 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-meta">
+                                <span class="timeline-date font-code-block">Jan 2024 - Present</span>
+                                <span class="timeline-role">Co-Founder &amp; AI Engineer</span>
+                            </div>
+                            <p class="timeline-company font-body-sm">Botanex Forge</p>
+                            <ul class="timeline-details font-body-base">
+                                <li>Led development of advanced automation workflows and Python automation bots.</li>
+                                <li>Co-developed and deployed full-stack web and mobile apps using React, FastAPI, and
+                                    PostgreSQL on cloud.</li>
+                                <li>Designed and integrated Agentic AI systems and LLM-powered pipelines using
+                                    LangChain, LangGraph, and MCP protocols.</li>
+                                <li>Collaborated on architecture decisions for scalable microservices.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-meta">
+                                <span class="timeline-date font-code-block">University</span>
+                                <span class="timeline-role">Bachelor of Science in Computer Science (BsCS)</span>
+                            </div>
+                            <p class="timeline-company font-body-sm">National University of Computer and Emerging
+                                Sciences (NUCES FAST)</p>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-meta">
+                                <span class="timeline-date font-code-block">High School</span>
+                                <span class="timeline-role">A Levels &amp; O Levels</span>
+                            </div>
+                            <p class="timeline-company font-body-sm">The City School</p>
+                            <p class="timeline-edu font-body-base">A Levels (Gulshan-e-Iqbal) and O Levels (Johar
+                                Campus).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ======================= FOOTER ======================= -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">© 2024 AI Engineer. Built for the Neural Age.</div>
+            <nav class="footer-links">
+                <a class="footer-link" href="https://github.com/Zaighum003" target="_blank" rel="noopener">GitHub</a>
+                <a class="footer-link" href="https://www.linkedin.com/in/zaighum-zawar-482557248/" target="_blank"
+                    rel="noopener">LinkedIn</a>
+                <a class="footer-link" href="https://huggingface.co/Zaighum003" target="_blank" rel="noopener">Hugging
+                    Face</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- ======================= SCRIPTS ======================= -->
+    <script>
+        // ---- Token Stream Background ----
+        (function () {
+            const cv = document.getElementById('token-stream-canvas');
+            const ctx = cv.getContext('2d');
+            let W, H;
+
+            function resize() {
+                W = window.innerWidth;
+                H = window.innerHeight;
+                cv.width = W;
+                cv.height = H;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            const words = [
+                // AI / LLM Core
+                'LLM', 'RAG', 'transformer', 'attention', 'embedding', 'token', 'tokenizer', 'context', 'prompt', 'inference',
+                'fine-tune', 'RLHF', 'temperature', 'top-p', 'hallucination', 'grounding', 'chain-of-thought', 'few-shot',
+                'zero-shot', 'system prompt', 'completion', 'streaming',
+                // Agentic AI
+                'agent', 'multi-agent', 'ReAct', 'tool use', 'function call', 'memory', 'planner', 'executor', 'reflection',
+                'self-critique', 'orchestrator', 'subagent', 'supervisor', 'handoff', 'state machine', 'loop', 'scratchpad',
+                'action', 'observation',
+                // LangChain / LangGraph
+                'LangChain', 'LangGraph', 'LangSmith', 'chain', 'node', 'edge', 'graph', 'StateGraph', 'checkpoint', 'runnable',
+                'LCEL', 'router', 'branch', 'conditional', 'invoke', 'stream', 'batch',
+                // Vector / RAG
+                'ChromaDB', 'pgvector', 'Pinecone', 'Weaviate', 'FAISS', 'cosine similarity', 'dot product', 'semantic search',
+                'retrieval', 'reranker', 'chunking', 'splitter', 'indexing', 'namespace', 'collection', 'HyperParameter',
+                // MCP / Tools
+                'MCP', 'MCP server', 'PubMed MCP', 'RxNorm MCP', 'tool call', 'schema', 'JSON schema', 'OpenAPI', 'Postman',
+                'REST', 'GraphQL', 'WebSocket',
+                // Models / APIs
+                'Claude', 'GPT-4o', 'Gemini', 'Groq', 'Llama', 'Mistral', 'Anthropic', 'OpenAI', 'HuggingFace', 'Ollama',
+                'LMStudio', 'vLLM',
+                // Fullstack
+                'React', 'Next.js', 'FastAPI', 'Node.js', 'Express', 'PostgreSQL', 'MySQL', 'Redis', 'Docker', 'Nginx',
+                'Vercel', 'REST API', 'WebSockets', 'microservices', 'JWT', 'OAuth', 'CORS',
+                // Cloud / MLOps
+                'GCP', 'Azure', 'MLflow', 'CI/CD', 'GitHub Actions', 'Docker', 'Kubernetes', 'monitoring', 'logging',
+                'tracing', 'latency', 'throughput',
+                // Your Projects
+                'CDSS', 'OBD-II', 'diagnostics', 'pgvector', 'drug interaction', 'blog generator', 'multilingual',
+                'Botanex Forge',
+                // Languages / Tools
+                'Python', 'JavaScript', 'SQL', 'Pandas', 'NumPy', 'scikit-learn', 'Jupyter', 'N8N', 'Cursor',
+                'GitHub Copilot'
+            ];
+
+            const streamCount = Math.floor(H / 48);
+            const streams = Array.from({ length: streamCount }, (_, i) => ({
+                y: 40 + i * 48,
+                x: -Math.random() * 800,
+                tokens: [],
+                speed: 0.4 + Math.random() * 0.5
+            }));
+
+            ctx.font = '400 20px "JetBrains Mono", monospace';
+            streams.forEach(s => {
+                let cx = 0;
+                for (let k = 0; k < 40; k++) {
+                    const w = words[Math.floor(Math.random() * words.length)];
+                    s.tokens.push({ text: w, x: cx, lit: Math.random() > 0.8 });
+                    cx += ctx.measureText(w).width + 36;
+                }
+            });
+
+            let t = 0;
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                t += 0.012;
+
+                ctx.font = '400 20px "JetBrains Mono", monospace';
+
+                streams.forEach((s, si) => {
+                    s.x += s.speed;
+                    const totalW = s.tokens.reduce((a, tk) => a + ctx.measureText(tk.text).width + 36, 0);
+                    if (s.x > totalW) s.x = -W / 2;
+
+                    s.tokens.forEach(tk => {
+                        const rx = tk.x - s.x;
+                        if (rx < -100 || rx > W + 100) return;
+
+                        const fadeZone = 120;
+                        const fade = Math.min(1, Math.min((rx + 100) / fadeZone, (W + 100 - rx) / fadeZone));
+                        const lit = tk.lit && (Math.sin(t * 1.5 + si + tk.x * 0.01) > 0.6);
+
+                        ctx.font = `${lit ? 500 : 400} 20px "JetBrains Mono", monospace`;
+
+                        if (lit) {
+                            ctx.fillStyle = `rgba(173, 198, 255, ${fade * 0.7})`;
+                        } else {
+                            ctx.fillStyle = `rgba(173, 198, 255, ${fade * 0.12})`;
+                        }
+
+                        ctx.fillText(tk.text, rx, s.y);
+                    });
+                });
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+
+            // Resize canvas on content change
+            const resizeObserver = new ResizeObserver(() => resize());
+            resizeObserver.observe(document.body);
+        })();
+
+        // ---- Scroll Spy for Navbar ----
+        (function () {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.navbar-link');
+
+            function updateActiveLink() {
+                const scrollY = window.scrollY + 120;
+                sections.forEach(section => {
+                    const top = section.offsetTop;
+                    const height = section.offsetHeight;
+                    const id = section.getAttribute('id');
+
+                    if (scrollY >= top && scrollY < top + height) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('data-section') === id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink();
+        })();
+
+        // ---- Mobile Navigation ----
+        (function () {
+            const btn = document.getElementById('mobile-menu-btn');
+            const overlay = document.getElementById('mobile-nav');
+            const closeBtn = document.getElementById('mobile-nav-close');
+            const links = overlay.querySelectorAll('a');
+
+            btn.addEventListener('click', () => overlay.classList.add('open'));
+            closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+            links.forEach(link => {
+                link.addEventListener('click', () => overlay.classList.remove('open'));
+            });
+        })();
+
+        // ---- Scroll Animations (Intersection Observer) ----
+        (function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+        })();
+
+        // ---- Navbar background on scroll ----
+        (function () {
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.style.background = 'rgba(16, 19, 26, 0.9)';
+                } else {
+                    navbar.style.background = 'rgba(16, 19, 26, 0.6)';
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>
